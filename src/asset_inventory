@@ -1,0 +1,85 @@
+
+#include <stdio.h>
+#include <string.h>
+
+struct Asset {
+    char id[20];
+    char name[30];
+    char type[20];
+    char ip[20];
+    char os[30];
+    char department[20];
+    char risk[15];
+    char status[15];
+};
+
+int main() {
+    struct Asset a[10];
+    int n, i;
+    int critical = 0, high = 0, medium = 0, vulnerable = 0;
+
+    printf("Enter number of assets: ");
+    scanf("%d", &n);
+
+    if (n < 1 || n > 10) {
+        printf("Invalid number of assets. Enter between 1 and 10.\n");
+        return 1;
+    }
+
+    for (i = 0; i < n; i++) {
+        printf("\nAsset %d\n", i + 1);
+
+        printf("Asset ID: ");
+        scanf("%19s", a[i].id);
+
+        printf("Asset Name: ");
+        scanf("%29s", a[i].name);
+
+        printf("Asset Type: ");
+        scanf("%19s", a[i].type);
+
+        printf("IP Address: ");
+        scanf("%19s", a[i].ip);
+
+        printf("Operating System: ");
+        scanf("%29s", a[i].os);
+
+        printf("Department: ");
+        scanf("%19s", a[i].department);
+
+        printf("Risk Level: ");
+        scanf("%14s", a[i].risk);
+
+        printf("Security Status: ");
+        scanf("%14s", a[i].status);
+
+        /* Count risk levels */
+        if (strcmp(a[i].risk, "Critical") == 0 ||
+            strcmp(a[i].risk, "critical") == 0) {
+            critical++;
+        }
+        else if (strcmp(a[i].risk, "High") == 0 ||
+                 strcmp(a[i].risk, "high") == 0) {
+            high++;
+        }
+        else if (strcmp(a[i].risk, "Medium") == 0 ||
+                 strcmp(a[i].risk, "medium") == 0) {
+            medium++;
+        }
+
+        /* Count vulnerable assets */
+        if (strcmp(a[i].status, "Vulnerable") == 0 ||
+            strcmp(a[i].status, "vulnerable") == 0) {
+            vulnerable++;
+        }
+    }
+
+    printf("\n===== Asset Security Summary =====\n");
+    printf("Total Assets      : %d\n", n);
+    printf("Critical Risk     : %d\n", critical);
+    printf("High Risk         : %d\n", high);
+    printf("Medium Risk       : %d\n", medium);
+    printf("Vulnerable Assets : %d\n", vulnerable);
+
+    return 0;
+}
